@@ -1,0 +1,68 @@
+function ChamferBg(el, opt)
+{
+	opt = opt || {};
+	opt.tl = opt.tl===undefined ? true : opt.tl;
+	opt.tr = opt.tr===undefined ? true : opt.tr;
+	opt.bl = opt.bl===undefined ? true : opt.bl;
+	opt.br = opt.br===undefined ? true : opt.br;
+
+	const SIZE = opt.size!==undefined ? opt.size : 10;
+	const SW = opt.sw!==undefined ? opt.sw : 1;
+	const SC = color(opt.sc || "black");
+	const FC = color(opt.fc);
+
+	assert(el);
+	//el.style#outline = "solid 1px blue";
+
+    el.paintBackground = function(gfx) {
+		const (W, H) = this.box(#dimension, #padding);
+		const (x, y) = this.box(#position, #inner, #view);
+		const (px, py) = this.box(#position, #padding, #view);
+		gfx.translate(-(x-px), -(y-py));
+		//gfx.fillColor(color("black")).ellipse(0, 0, 10);
+
+		var gpath = new Graphics.Path();
+		if(opt.tl)
+		{
+			gpath.moveTo(0, SIZE);
+			gpath.lineTo(SIZE, 0);
+		} else {
+			gpath.moveTo(0, 0);
+		}
+		if(opt.tr)
+		{
+			gpath.lineTo(W-SIZE, 0);
+			gpath.lineTo(W, SIZE);
+		} else {
+			gpath.lineTo(W, 0);
+		}
+		if(opt.br)
+		{
+			gpath.lineTo(W, H-SIZE);
+			gpath.lineTo(W-SIZE, H);
+		} else {
+			gpath.lineTo(W, H);
+		}
+		if(opt.bl)
+		{
+			gpath.lineTo(SIZE, H);
+			gpath.lineTo(0, H-SIZE);
+		} else {
+			gpath.lineTo(0, H);
+		}
+		gpath.close();
+
+		if(SW)
+			gfx.strokeWidth(SW).strokeColor(SC);
+		else
+			gfx.noStroke();
+
+		if(FC)
+			gfx.fillColor(FC);
+		else
+			gfx.noFill();
+
+		gfx.drawPath(gpath);
+		return true;
+    };
+}

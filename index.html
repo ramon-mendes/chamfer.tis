@@ -1,0 +1,182 @@
+﻿<!-- OmniView:on, console:off -->
+<html>
+<head>
+	<style>
+		@import url(css/style.css);
+	</style>
+	
+	<script type="text/tiscript">
+		include "chamfer.tis";
+
+		Utils.installLinkHandler(self);
+
+		var el;
+		el = $(main);
+		ChamferBg(el, {
+			size: 15,
+			sw: 3,
+			sc: "#2D4A8C",
+			fc: "white",
+		});
+
+		el = $(h1);
+		ChamferBg(el, {
+			size: 15,
+			sw: 4,
+			sc: "#B7D6D6",
+			fc: "#d5f9f9"
+		});
+
+
+		var icons = $$(icon);
+		for(var i = 0; i < icons.length; i++) {
+			ChamferBg(icons[i], {
+				size: 4,
+				sw: 0,
+				fc: "#3effff",
+			});
+		}
+
+		el = $(#menu1);
+		ChamferBg(el, {
+			size: 15,
+			sw: 2,
+			sc: "#9dffff",
+			fc: "#3effff"
+		});
+
+		el = $(#menu2);
+		ChamferBg(el, {
+			size: 20,
+			sw: 3,
+			sc: "#447aec",
+			fc: "#21ceff",
+			tr: false,
+			bl: false
+		});
+
+		el = $(#txt);
+		ChamferBg(el, {
+			size: 20,
+			sw: 3,
+			sc: "#447aec",
+			fc: "#21ceff",
+			tl: false,
+			br: false,
+			resize_observe: true
+		});
+	</script>
+</head>
+
+<body>
+	<main>
+		<section>
+			<h1>Chamfer.tis</h1>
+			<h2>Canvas chamfered boxes as CSS background for any DOM element</h2>
+			<p>Given any element, it will set its <code>background-image</code> with an image (rendered with Canvas API) that has chamfered borders and optionally a solid fill.</p>
+		</section>
+
+		<section>
+			<h3>Samples</h3>
+			<h4>Icons box:</h4>
+			<div>
+				<icon><img src="img/icon-chat.png" alt=""></icon>
+				<icon><img src="img/icon-mail.png" alt=""></icon>
+				<icon><img src="img/icon-write.png" alt=""></icon>
+			</div>
+		</section>
+
+		<section>
+			<h4>4 edges chamfer:</h4>
+			<menu id="menu1">
+				<header>Menu</header>
+				<a href="">Item 1</a>
+				<a href="">Item 1</a>
+				<a href="">Item 1</a>
+				<a href="">Item 1</a>
+				<a href="">Item 1</a>
+				<a href="">Item 1</a>
+			</menu>
+		</section>
+
+		<section>
+			<h4>2 edges chamfer:</h4>
+			<menu id="menu2">
+				<header>Menu</header>
+				<a href="">Item 1</a>
+				<a href="">Item 1</a>
+				<a href="">Item 1</a>
+				<a href="">Item 1</a>
+				<a href="">Item 1</a>
+				<a href="">Item 1</a>
+			</menu>
+		</section>
+
+		<section>
+			<h4>Textarea 2 edges:</h4>
+			<textarea id="txt" cols="40" rows="7" novalue="Type something here.."></textarea>
+		</section>
+
+		<!--<section>
+			<h4>Hexagons:</h4>
+			<div id="hex1"></div>
+			<div id="hex2"></div>
+		</section>-->
+
+
+		<section>
+			<h3>Usage:</h3>
+			<script src="dist/chamfer.js"></script>
+
+			Include ResizeObserver.js polyfill:
+			<pre>&lt;script src="dist/ResizeObserver.js"&gt;&lt;/script&gt;</pre>
+			Include chamfer.js:
+			<pre>&lt;script src="dist/chamfer.js"&gt;&lt;/script&gt;</pre>
+			<br />
+			Call <code>ChamferBg(el:Element, [options:Object])</code> for each element to chamfer:
+			<pre>var el = $(#box);
+ChamferBg(el, {
+	size: 20,
+	sw: 6,
+	sc: "#447aec",
+	fc: "#21ceff",
+	tl: false,
+	br: false,
+	resize_observe: true
+});</pre>
+			
+			<br />
+			The following options and their default values are available:
+			<pre>
+{
+	size: 5,	// chamfer size
+	sw: 1,		// stroke width
+	sc: "black",	// stroke color,
+	fc: undefined,	// fill color
+
+	tl: true,	// chamfer top-left corner?
+	tr: true,	// chamfer top-right corner?
+	bl: true,	// chamfer bottom-left corner?
+	br: true,	// chamfer bottom-right corner?
+
+	resize_observe: false
+	// turn on resize_observe observer?
+	// this will observer whenever the element
+	// resizes and will refresh the background
+}
+</pre>
+		</section>
+
+		<section>
+			<p>Download at <a href="https://github.com/MISoftware/Chamfer.tis">GitHub</a>.</p>
+
+			<p>Code licensed MIT. © 2017 Ramon F. Mendes</p>
+		</section>
+
+
+		<footer>
+			<a href="http://misoftware.rs/"><img src="img/logo_mi.png" /></a>
+		</footer>
+	</main>
+</body>
+</html>
